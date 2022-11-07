@@ -6,6 +6,8 @@
     import P5 from "./P5.svelte";
     import { compute_slots } from "svelte/internal";
 
+    // angle math
+
     let alpha = 1;
     const alphaRad = () => (Math.PI / 180) * alpha;
 
@@ -26,6 +28,7 @@
     const theta0 = () => Math.atan2(y(), x());
 </script>
 
+<!-- sliders for the gyro angles; yaw, pitch and roll respectively -->
 <input type="range" min="-90" max="90" bind:value={alpha} />
 
 <input type="range" min="-90" max="90" bind:value={beta} />
@@ -36,6 +39,7 @@
 
 <P5
     funcs={(p) => {
+        // this part does the gyro instrument
         return {
             setup: () => {
                 p.ellipseMode(p.RADIUS);
@@ -81,7 +85,7 @@
 <P5
     funcs={(p) => {
         let img;
-
+        // this part of the code does the map instrument. much to be upgraded
         let pathGPS = [];
         for (let i = 0; i < 1000; i++) {
             pathGPS.push(
@@ -156,7 +160,7 @@
 <P5
     funcs={(p) => {
         let altitude = 0;
-
+        // this part of the code does the altitude instrument
         return {
             setup: () => {
                 p.ellipseMode(p.RADIUS);
